@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -145,4 +146,30 @@ func SortAndSummarise(products []Product) []Product {
 	}
 
 	return summarizedProducts
+}
+
+// GenerateCSVFile writes the sorted and summarized products to a CSV file
+func GenerateCSVFile(filePath string, products []Product) error {
+	file, err := os.Create(filePath)
+	if err != nil {
+		return fmt.Errorf("unable to create file: %v", err)
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+
+	// Write headers
+	writer.Write([]string{"Product Code", "Quantity", "Pick Location"})
+
+	// Write the product data
+	for _, product := range products {
+		location := fmt.Sprintf("%s %d", product.Bay, product.Shelf)
+		record := []string{product.Code, strconv.Itoa(product.Quantity), location}
+		if err := writer.Write(record); err != nil {
+			return fmt.Errorf("error writing record: %v", err)
+		}
+	}
+
+	return nil
 }

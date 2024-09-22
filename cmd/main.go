@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"portal-fullstack/internal"
 
 	"github.com/gorilla/mux"
@@ -17,6 +18,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", HomeHandler)
 	r.HandleFunc("/upload", UploadHandler).Methods("POST")
+	r.HandleFunc("/download", DownloadHandler).Methods("GET")
 
 	// Start the web server
 	log.Println("Server running on http://localhost:8080")
@@ -55,6 +57,13 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	// Sort and summarize the products
 	sortedProducts := internal.SortAndSummarise(products)
 
+	// Save the processed CSV file
+	err = internal.GenerateCSVFile("sorted_products.csv", sortedProducts)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Error generating CSV: %v", err), http.StatusInternalServerError)
+		return
+	}
+
 	// Render the result in the template
 	data := struct {
 		Products []internal.Product
@@ -62,4 +71,20 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		Products: sortedProducts,
 	}
 	tpl.Execute(w, data)
+}
+
+// DownloadHandler serves the downloadable CSV file
+func DownloadHandler(w http.ResponseWriter, r *http.Request) {
+	filePath := "sorted_products.csv"
+
+	// Check if the file exists
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		http.Error(w, "File not found", http.StatusNotFound)
+		return
+	}
+
+	// Set headers and serve the file for download
+	w.Header().Set("Content-Disposition", "attachment; filename=sorted_products.csv")
+	w.Header().Set("Content-Type", "text/csv")
+	http.ServeFile(w, r, filePath)
 }
