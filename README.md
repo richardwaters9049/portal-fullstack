@@ -93,23 +93,23 @@ go build -o portal-fullstack ./cmd/main.go
 
 5. Access the application in your web browser at `http://localhost:8080`.
 
-## Usage
+# Usage
 
-# Uploading a CSV File:
+## Uploading a CSV File:
 
 Navigate to the home page.
 Select a CSV file using the upload form and click "Upload and Process."
 
-# Processing the Data:
+## Processing the Data:
 
 The backend processes the file, sorting and summarizing the data based on the product bay and shelf.
 
-# Viewing Results:
+## Viewing Results:
 
 The results will be displayed in a table on the webpage.
 The user can also download the processed results as a new CSV file.
 
-## How It Works
+# How It Works
 
 The core functionality is powered by Go. When a user uploads a CSV file:
 
@@ -135,7 +135,7 @@ Product Code,Quantity,Pick Location
 36389,4,AC 5
 ```
 
-## Middleware and Validation
+# Middleware and Validation
 
 The application employs middleware to clean and validate the CSV records before processing. This is necessary because user-uploaded data can often be inconsistent, containing unwanted characters, malformed rows, or incorrect data.
 
@@ -163,7 +163,7 @@ func CleanCSVRecords(records [][]string) [][]string {
 }
 ```
 
-## CSV Download Feature
+# CSV Download Feature
 
 Once the CSV data is processed and displayed on the frontend, a new feature has been added to allow users to download the processed data as a CSV file. This gives the user flexibility to store or further manipulate the data.
 
@@ -184,13 +184,13 @@ func DownloadHandler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## Best Practices and Design Considerations
+# Best Practices and Design Considerations
 
 - Separation of Concerns: The project is divided into clear sections, with routing in main.go, processing logic in processor.go, and the frontend in index.html.
 - Modularity: Functions are kept small and focused, making them easier to maintain and test.
 - Error Handling: The application uses proper error handling to ensure robust performance, particularly when dealing with user inputs like CSV files.
 - Middleware for Data Validation: We clean and validate the uploaded CSV data before processing, ensuring that any invalid entries are filtered out, which protects the system from crashes or incorrect outputs.
 
-## Conclusion
+# Conclusion
 
 This project demonstrates key skills in backend web development using Go, including file handling, data processing, sorting, and summarization, while also incorporating frontend interaction with a user-friendly interface. By implementing middleware and validation, the application ensures data integrity, making it a strong example of production-ready Go code.
