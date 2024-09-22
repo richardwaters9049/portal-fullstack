@@ -1,5 +1,7 @@
 # CSV Processor Application
 
+![CSV Upload Screenshot](images/webpage.png)
+
 This project is a web-based CSV file processor built using **Go**. It allows users to upload a CSV file, processes it on the backend, sorts and summarizes the data, and displays the result on a webpage. Additionally, users can download the processed CSV file.
 
 # Table of Contents
