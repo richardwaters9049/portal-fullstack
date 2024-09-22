@@ -2,7 +2,7 @@
 
 This project is a web-based CSV file processor built using **Go**. It allows users to upload a CSV file, processes it on the backend, sorts and summarizes the data, and displays the result on a webpage. Additionally, users can download the processed CSV file.
 
-## Table of Contents
+# Table of Contents
 
 - [Project Overview](#project-overview)
 - [Features](#features)
@@ -15,13 +15,13 @@ This project is a web-based CSV file processor built using **Go**. It allows use
 - [CSV Download Feature](#csv-download-feature)
 - [Best Practices and Design Considerations](#best-practices-and-design-considerations)
 
-## Project Overview
+# Project Overview
 
 This project was created to demonstrate skills in backend development using **Go**. The goal was to build an application that can accept CSV files, process them, sort product data according to specific warehouse bay and shelf logic, and present the summarized data to the user in both a web interface and downloadable CSV file format.
 
 The warehouse is structured into 52 bays, labelled from A to AZ, and each bay contains 10 shelves. Products need to be sorted first by bay and then by shelf, and any products located on the same bay and shelf should have their quantities summed.
 
-## Features
+# Features
 
 - **CSV File Upload:** Users can upload a CSV file that contains product data with product codes, quantities, and pick locations.
 - **Data Sorting:** The backend processes the uploaded CSV, sorting products by bay and shelf.
@@ -30,14 +30,14 @@ The warehouse is structured into 52 bays, labelled from A to AZ, and each bay co
 - **Middleware for Data Validation:** Ensures that the CSV data is properly cleaned and validated before processing, removing invalid or malformed entries.
 - **Error Handling:** The application gracefully handles errors like invalid CSV format, incorrect data, and file size limitations.
 
-## Technologies Used
+# Technologies Used
 
 - **Go:** The backend is written in Go to handle file uploads, CSV processing, and data sorting.
 - **HTML & CSS:** For rendering the upload form and displaying the processed results in a table on the frontend.
 - **Gorilla Mux:** A powerful routing library used for managing HTTP routes in the Go web server.
 - **CSV Package:** The Go `encoding/csv` package is used to parse and write CSV files.
 
-## Project Structure
+# Project Structure
 
 The project is organized as follows:
 
@@ -61,7 +61,7 @@ The project is organized as follows:
 
 - **web/templates/index.html**: Frontend template for user interaction, including CSV upload and displaying results.
 
-## Setup and Installation
+# Setup and Installation
 
 To set up this project locally, follow these steps:
 
