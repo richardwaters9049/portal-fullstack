@@ -134,8 +134,8 @@ And an example of the processed output:
 
 ```mathematica
 Product Code,Quantity,Pick Location
-12456,10,AB 9
-36389,4,AC 5
+23568,8,AH 8
+14789,3,AM 9
 ```
 
 # Middleware and Validation
